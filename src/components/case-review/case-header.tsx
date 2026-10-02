@@ -15,7 +15,7 @@ import {
 import { formatDistanceToNow, format } from "date-fns";
 import { toast } from "sonner";
 import { fetchApi } from "@/lib/fetch";
-import { resolveUnderstanding, type EmailReviewRow, type EmailUnderstanding } from "@/lib/types";
+import { resolveUnderstanding, type EmailReviewRow } from "@/lib/types";
 
 interface Props {
   review: EmailReviewRow;

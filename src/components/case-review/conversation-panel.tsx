@@ -6,7 +6,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Mail, Send, ArrowRight } from "lucide-react";
 import { format } from "date-fns";
-import { resolveThread, resolveCurrentEmail, type EmailReviewRow, type ThreadContext, type ThreadMessage } from "@/lib/types";
+import { resolveThread, resolveCurrentEmail, type EmailReviewRow, type ThreadMessage } from "@/lib/types";
 
 interface Props {
   review: EmailReviewRow;

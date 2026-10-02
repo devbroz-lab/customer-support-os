@@ -239,6 +239,23 @@
   border-color: var(--node-selected);
   box-shadow: 0 0 0 2px rgba(138, 87, 48, 0.22), var(--shadow-elevated);
 }
+
+/* SupportOS workflow playback states. */
+.react-flow__node.supportos-flow-node-active .langflow-node {
+  animation: supportos-node-pulse 1.4s ease-in-out infinite;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.18), 0 12px 30px rgba(79, 70, 229, 0.18);
+}
+.react-flow__edge.supportos-flow-edge .react-flow__edge-path {
+  stroke: #6366f1;
+  stroke-width: 2;
+}
+@keyframes supportos-node-pulse {
+  50% { transform: translateY(-2px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .react-flow__node.supportos-flow-node-active .langflow-node { animation: none; }
+}
 .langflow-node__header {
   align-items: center;
   background: var(--surface-subtle);

@@ -73,6 +73,10 @@ export interface LangflowViewerProps {
   showDetails?: boolean;
   initialView?: "fit" | "exported";
   theme?: "light" | "dark" | "auto";
+  animateEdges?: boolean;
+  activeNodeId?: string | null;
+  title?: string;
+  description?: string;
   onError?: (errors: ViewerWarning[]) => void;
   onNodeSelect?: (node: ViewerNode | null) => void;
 }
