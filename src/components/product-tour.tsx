@@ -14,21 +14,13 @@ type Step = {
 };
 
 const steps: Step[] = [
-  { id: "welcome", route: "/", target: "main header", title: "Welcome to SupportOS", description: "This is an AI-powered customer operations workspace. In the next few moments, you will see how teams prioritize, resolve, and govern customer conversations." },
-  { id: "metrics", route: "/", target: "main section:first-of-type", title: "See operational health instantly", description: "Open workload, SLA risk, escalations, and resolutions give teams a clear sense of what needs attention now." },
-  { id: "priority", route: "/", target: "main section:nth-of-type(2) > div:first-child", title: "Work the highest-impact cases first", description: "Priority Queue combines customer context, case status, and service-level risk so reviewers can act before commitments are missed." },
-  { id: "intelligence", route: "/", target: "main section:nth-of-type(2) > div:nth-child(2)", title: "AI prepares the work", description: "SupportOS enriches every incoming case with intent, verified context, and helpful response guidance. Your team keeps the final decision." },
-  { id: "workflow-entry", route: "/", target: "[data-tour='workflow-entry']", title: "Explore the orchestration behind SupportOS", description: "This interactive workflow demo shows how specialized agents prepare incoming customer cases for human review." },
-  { id: "views", route: "/reviews", target: "main section:first-of-type", title: "Focus on the right work", description: "Saved views help frontline agents and senior reviewers switch between personal queues, escalations, unassigned work, and SLA risk." },
-  { id: "inbox", route: "/reviews", target: "main section:nth-of-type(2)", title: "Triage from one operational inbox", description: "Every row has the signals needed to make a quick, informed decision: customer tier, channel, AI confidence, priority, owner, and SLA." },
-  { id: "case", route: "/reviews/CS-2481", target: "main header", title: "Enter the case workspace", description: "This high-priority payment dispute shows how SupportOS brings customer context and decision controls into one focused workspace." },
-  { id: "customer", route: "/reviews/CS-2481", target: "main aside:first-of-type section:first-child", title: "Keep customer context close", description: "Review account details and the entire conversation without losing your place or switching between systems." },
-  { id: "draft", route: "/reviews/CS-2481", target: "main section.min-w-0", title: "Review an AI-assisted response", description: "AI drafts a customer-ready reply using verified facts. Reviewers can edit, save, or use it as a starting point before any message is sent." },
-  { id: "insights", route: "/reviews/CS-2481", target: "main aside:last-of-type section:first-child", title: "Make safer decisions with evidence", description: "The AI decision brief separates verified facts, policy guardrails, and classification signals so important judgment stays visible.", beforeStep: "insights" },
-  { id: "actions", route: "/reviews/CS-2481", target: "main > div > div:first-child", title: "Approve, send, or escalate", description: "Reviewers can confidently approve a response or route complex cases to specialists. SupportOS records the outcome in the case history." },
-  { id: "audit", route: "/reviews/CS-2481", target: "main aside:last-of-type section:first-child", title: "Make every decision accountable", description: "The activity view captures assignments, draft updates, escalation reasons, and resolution events for a transparent audit trail.", beforeStep: "activity" },
-  { id: "performance", route: "/performance", target: "main > div > div", title: "Turn support activity into insight", description: "Team leaders can track service quality, resolution trends, capacity, and contributor performance in one view." },
-  { id: "automation", route: "/ai-operations?tab=workflow", target: "[data-tour='agent-workflow']", title: "See governed automation in action", description: "This interactive graph shows how coordinated agents enrich, verify, draft, and route each case with human oversight." },
+  { id: "workflow-hero", route: "/ai-operations?tab=workflow", target: "[data-tour='agent-workflow']", title: "Welcome to SupportOS", description: "Watch how coordinated AI agents transform an incoming email into a review-ready customer case in seconds." },
+  { id: "workflow-stages", route: "/ai-operations?tab=workflow", target: "[data-tour='agent-workflow'] header", title: "Each stage has a specialist agent", description: "Color-coded stages show ingest, triage, context gathering, verification, drafting, and human review." },
+  { id: "workflow-explore", route: "/ai-operations?tab=workflow", target: "[data-tour='agent-workflow'] footer", title: "Inspect any agent's role", description: "Click an agent card to see its business purpose, capabilities, and how it contributes to safe automation." },
+  { id: "overview-entry", route: "/overview", target: "main header", title: "Now see how teams use this", description: "Operations shows the human side: prioritized queues, AI-prepared drafts, and decision controls." },
+  { id: "inbox", route: "/reviews", target: "main section:first-of-type", title: "Focus on the right work", description: "Saved views help agents switch between personal queues, escalations, unassigned work, and SLA risk." },
+  { id: "case-workflow", route: "/reviews/CS-2481", target: "main header", title: "Review an AI-prepared case", description: "AI enriches each case with trusted facts, policy guardrails, and a draft response ready for approval." },
+  { id: "performance", route: "/performance", target: "main > div > div", title: "Track automation impact", description: "See how AI assistance improves resolution speed, quality, and team capacity over time." },
 ];
 
 type TourContextValue = { startTour: () => void };
@@ -55,7 +47,7 @@ export function ProductTourProvider({ children }: { children: React.ReactNode })
       didAutoStart.current = true;
       setStepIndex(0);
       setActive(true);
-      router.push("/");
+      router.push("/ai-operations?tab=workflow");
     }, 700);
     return () => window.clearTimeout(timer);
   }, [router]);
@@ -85,12 +77,12 @@ export function ProductTourProvider({ children }: { children: React.ReactNode })
   const startTour = () => {
     setStepIndex(0);
     setActive(true);
-    router.push("/");
+    router.push("/ai-operations?tab=workflow");
   };
   const move = (direction: -1 | 1) => {
     const next = stepIndex + direction;
     if (next < 0) return;
-    if (next >= steps.length) { finish(); router.push("/reviews"); return; }
+    if (next >= steps.length) { finish(); router.push("/overview"); return; }
     const nextStep = steps[next];
     setStepIndex(next);
     if (nextStep.route !== pathname) router.push(nextStep.route);

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Activity, BrainCircuit, CheckCircle2, ShieldCheck, Sparkles } from "lucide-react";
 import { AgentWorkflow } from "@/components/ai-operations/agent-workflow";
 import { cn } from "@/lib/utils";
@@ -8,13 +8,7 @@ import { cn } from "@/lib/utils";
 const metrics = [["94.2%", "Intent accuracy", BrainCircuit], ["82%", "Draft acceptance", CheckCircle2], ["1,204", "Hours saved", Sparkles], ["99.8%", "Safety checks passed", ShieldCheck]];
 
 export default function AiOperationsPage() {
-  const [tab, setTab] = useState<"overview" | "workflow">("overview");
-  useEffect(() => {
-    const timer = window.setTimeout(() => {
-      if (new URLSearchParams(window.location.search).get("tab") === "workflow") setTab("workflow");
-    }, 0);
-    return () => window.clearTimeout(timer);
-  }, []);
+  const [tab, setTab] = useState<"overview" | "workflow">("workflow");
   return <div className="min-h-screen bg-[#f6f7fb] px-5 py-7 lg:px-10 lg:py-9"><div className="mx-auto max-w-7xl"><header className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between"><div><p className="text-sm font-medium text-indigo-600">Automation intelligence</p><h1 className="mt-1 text-3xl font-bold tracking-tight">AI operations</h1><p className="mt-2 text-sm text-slate-500">Monitor how SupportOS augments every customer interaction.</p></div><div className="rounded-xl border bg-white px-3 py-2 text-xs font-medium text-emerald-700"><span className="mr-2 inline-block size-2 rounded-full bg-emerald-500" />All automations healthy</div></header>
     <div className="mt-7 inline-flex rounded-xl border border-slate-200 bg-white p-1"><button onClick={() => setTab("overview")} className={cn("rounded-lg px-4 py-2 text-sm font-semibold transition", tab === "overview" ? "bg-indigo-600 text-white shadow-sm" : "text-slate-500 hover:text-slate-900")}>Overview</button><button onClick={() => setTab("workflow")} className={cn("rounded-lg px-4 py-2 text-sm font-semibold transition", tab === "workflow" ? "bg-indigo-600 text-white shadow-sm" : "text-slate-500 hover:text-slate-900")}>Agent workflow <span className="ml-1.5 rounded-md bg-violet-100 px-1.5 py-0.5 text-[10px] text-violet-700">Live demo</span></button></div>
     {tab === "workflow" ? <AgentWorkflow /> : <Overview />}
