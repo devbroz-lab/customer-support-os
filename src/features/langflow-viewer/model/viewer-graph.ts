@@ -29,13 +29,6 @@ export interface ViewerField {
   options?: string[];
 }
 
-export interface SafeConfigurationField {
-  name: string;
-  displayName: string;
-  value: string;
-  masked: boolean;
-}
-
 export interface ViewerNode {
   id: string;
   componentType: string;
@@ -63,20 +56,4 @@ export interface ViewerGraph {
   nodes: ViewerNode[];
   edges: ViewerEdge[];
   warnings: ViewerWarning[];
-}
-
-export interface LangflowViewerProps {
-  flow: unknown;
-  className?: string;
-  height?: string | number;
-  showMinimap?: boolean;
-  showDetails?: boolean;
-  initialView?: "fit" | "exported";
-  theme?: "light" | "dark" | "auto";
-  animateEdges?: boolean;
-  activeNodeId?: string | null;
-  title?: string;
-  description?: string;
-  onError?: (errors: ViewerWarning[]) => void;
-  onNodeSelect?: (node: ViewerNode | null) => void;
 }
